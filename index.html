@@ -34,6 +34,7 @@ button:disabled{opacity:.6;cursor:wait}
   <div class="msg" id="msg" role="status"></div>
 </form>
 <script>
+(()=>{ // 包在函數裡：document.write 後全局變量會保留，不能和網站腳本的 $ 等重名
 const ITER=600000, enc=new TextEncoder(), $=s=>document.getElementById(s);
 let blobP=fetch('site.bin',{cache:'no-cache'}).then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()});
 async function open_(raw){
@@ -54,6 +55,7 @@ $('f').addEventListener('submit',async e=>{
 });
 try{const k=sessionStorage.getItem('xd-k'); if(k){$('msg').className='msg ok';$('msg').textContent='正在打開…';
   open_(Uint8Array.from(atob(k),c=>c.charCodeAt(0))).catch(()=>{sessionStorage.removeItem('xd-k');$('msg').textContent=''})}}catch(e){}
+})();
 </script>
 </body>
 </html>
