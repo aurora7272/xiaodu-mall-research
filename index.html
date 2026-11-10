@@ -53,7 +53,7 @@ $('f').addEventListener('submit',async e=>{
   $('go').disabled=true; $('msg').className='msg ok'; $('msg').textContent='正在解密…';
   try{await open_()}catch(err){$('go').disabled=false;$('msg').className='msg';$('msg').textContent='密碼不正確，請重試。';$('pw').select()}
 });
-try{const k=sessionStorage.getItem('xd-k'); if(k){$('msg').className='msg ok';$('msg').textContent='正在打開…';
+try{const k=sessionStorage.getItem('xd-k')||sessionStorage.getItem('xd-k'); if(k){$('msg').className='msg ok';$('msg').textContent='正在打開…';
   open_(Uint8Array.from(atob(k),c=>c.charCodeAt(0))).catch(()=>{sessionStorage.removeItem('xd-k');$('msg').textContent=''})}}catch(e){}
 })();
 </script>
